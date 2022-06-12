@@ -64,7 +64,7 @@ function showNextQuestion() {
     ul.innerHTML = ""
     for(var i=0; i<question.choices.length; i++) {
         var li = document.createElement("li");
-        li.innerHTML = question.choices[i];
+        li.innerHTML = (i+1) + ". " + question.choices[i];
         li.setAttribute("data-index", i);
         li.addEventListener("click", onOptionClick)
         ul.append(li)
@@ -115,6 +115,16 @@ function finishQuiz() {
     document.getElementById("final-score").textContent = score
     showElement(allDoneSection)
     
+}
+
+function saveScore(event) {
+    event.preventDefault()
+    var initials = event.target.querySelector("input").value
+    var result = {score, initials}
+    var scores = JSON.parse(localStorage.getItem("scores")) || []
+    scores.push(result)
+
+    localStorage.setItem("scores", JSON.stringify(scores))
 }
 
 
