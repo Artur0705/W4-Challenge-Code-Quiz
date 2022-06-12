@@ -10,17 +10,50 @@
 <body>
     <div id="container">
 
-        <div id="timer"></div>
-        <div id="questions">
+        <div class="quiz-header">
+            <div id="timer">time</div>
+            <div id="high-scores">
+                <a href="">View high scores</a>
+            </div>
+
+        </div>
+        
+        <div id="start">
             <h1>Coding Quiz Challenge</h1>
             <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
                 answers
                 will penalize your score/time by ten seconds!</p>
-                <ul id="user-choices"></ul>
-                <button id="start-time">Start Quiz</button>
+                <button id="start-time" onclick="startQuiz()">Start Quiz</button>
         </div>
 
+        <div id="questions">
+            <h2>Question 1</h2>
+            <ul class="options">
+                <li>a1</li>
+                <li>a2</li>
+                <li>a3</li>
+                <li>a4</li>
+            </ul>
+
+            <div id="answer-outcome">Wrong!</div>
+
+        </div>
+
+        <div id="all-done">
+            <h1>All done!</h1>
+            <p>Your final score is</p>
+            <p>
+                Enter initials:
+                <input type="text">
+                <button>Submit</button>
+            </p>
+            <div id="answer-outcome">Wrong!</div>
+        </div>
+
+
     </div>
+
+    
 
     <script src="assets/script.js"></script>
     
