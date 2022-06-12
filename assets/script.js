@@ -1,8 +1,11 @@
-var startSection = document.getElementById("start")
-var questionsSection = document.getElementById("questions")
-var allDoneSection = document.getElementById("all-done")
-var answerOutcome = document.getElementById("answer-outcome")
-var timerElement = document.getElementById("timer")
+var startSection = document.getElementById("start");
+var questionsSection = document.getElementById("questions");
+var allDoneSection = document.getElementById("all-done");
+var answerOutcome = document.getElementById("answer-outcome");
+var timerElement = document.getElementById("timer");
+var quizSection = document.getElementById("quiz");
+var scoresSection = document.getElementById("scores");
+
 
 var score = 0
 var nextQuestion = 0
@@ -89,11 +92,16 @@ function onOptionClick (event) {
     showNextQuestion()
 }
 
+function setTimeValue(val) {
+    timerElement.textContent = "Time: " + val;
+
+}
+
 function startTimer() {
-    timerElement.textContent = "Time: " + timerCount;
+    setTimeValue(timerCount)
     timer = setInterval(function() {
       timerCount--;
-      timerElement.textContent = "Time: " + timerCount;
+      setTimeValue(timerCount)
       if (timerCount === 0) {
         clearInterval(timer);
         finishQuiz();
@@ -102,6 +110,7 @@ function startTimer() {
   }
 
 function startQuiz () {
+    timerCount = questions.length * timePerQuestion
     hideElement(startSection)
     showElement(questionsSection)
     showNextQuestion()
@@ -113,19 +122,69 @@ function finishQuiz() {
     hideElement(questionsSection)
 
     document.getElementById("final-score").textContent = score
+    nextQuestion = 0
     showElement(allDoneSection)
     
 }
 
 function saveScore(event) {
     event.preventDefault()
-    var initials = event.target.querySelector("input").value
-    var result = {score, initials}
+    var input = event.target.querySelector("input")
+    var result = {
+        score,
+        initials: input.value
+    }
+
     var scores = JSON.parse(localStorage.getItem("scores")) || []
     scores.push(result)
-
+    score = 0
+    setTimeValue(0)
+    input.value = ""
+    
     localStorage.setItem("scores", JSON.stringify(scores))
+    viewHighScores(event)
 }
 
+function viewHighScores(event) {
+    event.preventDefault()
+    hideElement(quizSection)
+
+    renderHighScores()
+    showElement(scoresSection)
+}
+
+function renderHighScores() {
+    var ul = document.querySelector("#scores ul")
+    var scores = JSON.parse(localStorage.getItem("scores")) || []
+    scores = sortScores(scores)
+    ul.innerHTML = ""
+    for(var i=0; i<scores.length; i++) {
+        var li = document.createElement("li");
+        li.innerHTML = (i+1) + ". " + scores[i].initials + " - " +scores[i].score;
+        ul.append(li)
+
+    }
+}
+
+function clearHighScores() {
+    localStorage.setItem("scores", JSON.stringify([]))
+    renderHighScores()
+}
+
+function viewQuiz() {
+    hideElement(scoresSection)
+    hideElement(allDoneSection)
+    hideElement(answerOutcome)
+    showElement(startSection)
+    showElement(quizSection)
+}
+
+function sortScores(scores) {
+    return scores.sort(function (a, b){
+        return b.score - a.score
+
+    })
+
+}
 
 

@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    <div id="container">
+    <div class="container" id="quiz">
 
         <div class="quiz-header">
             <div id="timer"></div>
             <div id="high-scores">
-                <a href="">View high scores</a>
+                <a href="#" onclick="viewHighScores(event)">View high scores </a>
             </div>
 
         </div>
@@ -48,10 +48,18 @@
 
         <div id="answer-outcome"></div>
 
+        
 
     </div>
 
-    
+    <div class="container" id="scores">
+        <h1>High Scores</h1>
+        <ul>
+
+        </ul>
+        <button onclick="viewQuiz()">Go back</button>
+        <button onclick="clearHighScores()">Clear high scores</button>
+    </div>
 
     <script src="assets/script.js"></script>
     

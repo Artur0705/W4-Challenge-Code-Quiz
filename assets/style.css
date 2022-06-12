@@ -1,4 +1,4 @@
-#container {
+.container {
     position: absolute;
     left: 30%;
     top: 20%;
@@ -96,4 +96,8 @@
 
 #all-done p {
     font-size: 28px;
+}
+
+#scores {
+    display: none;
 }
