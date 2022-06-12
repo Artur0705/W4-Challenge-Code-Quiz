@@ -2,8 +2,11 @@ var startSection = document.getElementById("start")
 var questionsSection = document.getElementById("questions")
 var allDoneSection = document.getElementById("all-done")
 var answerOutcome = document.getElementById("answer-outcome")
+var timerElement = document.getElementById("timer")
 
+var score = 0
 var nextQuestion = 0
+
 var questions = [
     {
         title: "Commonly used data types DO NOT include",
@@ -34,6 +37,10 @@ var questions = [
         answer: 3
     },
 ]
+
+var timer
+var timePerQuestion = 20
+var timerCount = questions.length * timePerQuestion
 
 function hideElement (section) {
     section.style.display = "none"
@@ -71,24 +78,44 @@ function onOptionClick (event) {
 
     if(choice == question.answer) {
         answerOutcome.innerHTML = "Correct!"
+        score++
     }
     else {
         answerOutcome.innerHTML = "Wrong!"
+        timerCount -= timePerQuestion 
     }
     nextQuestion++
     showElement(answerOutcome)
     showNextQuestion()
 }
 
+function startTimer() {
+    timerElement.textContent = "Time: " + timerCount;
+    timer = setInterval(function() {
+      timerCount--;
+      timerElement.textContent = "Time: " + timerCount;
+      if (timerCount === 0) {
+        clearInterval(timer);
+        finishQuiz();
+      }
+    }, 1000);
+  }
+
 function startQuiz () {
     hideElement(startSection)
     showElement(questionsSection)
     showNextQuestion()
-
+    startTimer()
 }
 
 function finishQuiz() {
+    clearInterval(timer);
     hideElement(questionsSection)
+
+    document.getElementById("final-score").textContent = score
     showElement(allDoneSection)
+    
 }
+
+
 
