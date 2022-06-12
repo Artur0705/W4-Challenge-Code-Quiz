@@ -1,0 +1,36 @@
+#container {
+    position: absolute;
+    left: 30%;
+    top: 20%;
+    width: 800px;
+    height: 600px;
+    border: 1px solid rgb(41, 170, 36);
+}
+
+h1 ,p  {
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#start-time {
+    background-color: rgb(12, 12, 102);
+    margin-top: 40px;
+    margin-left: 310px;
+    padding: 12px 20px;
+    font-size: 18px;
+    color: aliceblue;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+#questions {
+    margin: 20px;
+}
+
+#timer {
+    float: right;
+}
