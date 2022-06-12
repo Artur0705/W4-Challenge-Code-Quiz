@@ -68,6 +68,8 @@
 }
 
 #answer-outcome {
+    display: none;
+    margin: 20px;
     border-top: 1px solid grey;
     color: grey;
     font-size: 32px;
