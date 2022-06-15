@@ -175,6 +175,7 @@ function viewQuiz() {
     hideElement(scoresSection)
     hideElement(allDoneSection)
     hideElement(answerOutcome)
+    hideElement(questionsSection)
     showElement(startSection)
     showElement(quizSection)
 }

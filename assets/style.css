@@ -1,10 +1,21 @@
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+}
+
+:root {
+    --color-dark: rgb(12, 12, 102);
+    --color-light:rgb(145, 18, 134);
+}
+
 .container {
     position: absolute;
     left: 30%;
     top: 20%;
     width: 800px;
     height: 600px;
-    border: 1px solid rgb(41, 170, 36);
+    padding: 40px;
+    border: 4px solid black;
+    box-shadow: 15px 15px 5px lightgray;
 }
 
 
@@ -14,7 +25,7 @@
 }
 
 #start-time {
-    background-color: rgb(12, 12, 102);
+    background-color: var(--color-dark);
     margin-top: 40px;
     padding: 12px 20px;
     font-size: 18px;
@@ -22,6 +33,11 @@
     cursor: pointer;
     border-radius: 8px;
 }
+
+#start-time:hover {
+    background-color: var(--color-light)
+}
+
 
 .quiz-header {
     padding: 25px;
@@ -47,7 +63,7 @@
 }
 
 .options li {
-    background-color: rgb(5, 4, 51);
+    background-color: var(--color-dark);
     padding: 10px;
     margin: 10px;
     color: white;
@@ -58,7 +74,7 @@
 }
 
 .options li:hover {
-    background-color: rgb(145, 18, 134);
+    background-color: var(--color-light)
 }
 
 #questions {
@@ -83,11 +99,15 @@
 }
 
 #all-done button {
-    background-color: rgb(12, 12, 102);
+    background-color: var(--color-dark);
     color: aliceblue;
     cursor: pointer;
     border-radius: 4px;
 
+}
+
+#all-done button:hover {
+    background-color: var(--color-light);
 }
 
 #all-done h1 {
@@ -100,4 +120,29 @@
 
 #scores {
     display: none;
+}
+
+#scores ul {
+    list-style: none;
+    
+}
+
+#scores li {
+    background-color: lightskyblue;
+    margin: 10px;
+    width: 400px;
+}
+
+#scores button {
+    background-color: var(--color-dark);
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    border-radius: 7px;
+    width: 250px;
+    cursor: pointer;
+}
+
+#scores button:hover {
+    background-color: var(--color-light);
 }
