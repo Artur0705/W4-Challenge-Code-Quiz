@@ -7,14 +7,20 @@ var quizSection = document.getElementById("quiz");
 var scoresSection = document.getElementById("scores");
 
 
-var score = 0
-var nextQuestion = 0
+var score = 0;
+var nextQuestion = 0;
 
 var questions = [
     {
         title: "Commonly used data types DO NOT include",
         choices: ["strings", "booleans", "alerts", "numbers"],
         answer: 2
+    },
+
+    {
+        title: "Inside which HTML element do we put the JavaScript?",
+        choices: ["script", "javascript", "scripting", "js"],
+        answer: 0
     },
 
     {
@@ -29,9 +35,21 @@ var questions = [
     },
 
     {
+        title: "Where is the correct place to insert a JavaScript?",
+        choices: ["The <head> section", "Both the head section and the body section are correct  ", "The body section"],
+        answer: 2
+    },
+
+    {
         title: "String values must be enclosed within ____ when being assigned to variables.",
         choices: ["commas", "curly brackets", "quotes", "parenthesis"],
         answer: 2
+    },
+
+    {
+        title: "The external JavaScript file must contain the <script> tag ",
+        choices: ["True", "False"],
+        answer: 1
     },
 
     {
@@ -41,36 +59,35 @@ var questions = [
     },
 ]
 
-var timer
-var timePerQuestion = 20
-var timerCount = questions.length * timePerQuestion
+var timer;
+var timePerQuestion = 20;
+var timerCount = questions.length * timePerQuestion;
 
 function hideElement (section) {
     section.style.display = "none"
-}
+};
 
 function showElement (section) {
     section.style.display = "block"
-}
+};
 
 function showNextQuestion() {
     if(questions.length <= nextQuestion) {
         finishQuiz()
-        return
-
+        return;
     }
 
     
-    var question = questions[nextQuestion]
-    document.getElementById("question-title").innerHTML = question.title
+    var question = questions[nextQuestion];
+    document.getElementById("question-title").innerHTML = question.title;
     var ul = document.querySelector("#questions ul")
     ul.innerHTML = ""
     for(var i=0; i<question.choices.length; i++) {
         var li = document.createElement("li");
         li.innerHTML = (i+1) + ". " + question.choices[i];
         li.setAttribute("data-index", i);
-        li.addEventListener("click", onOptionClick)
-        ul.append(li)
+        li.addEventListener("click", onOptionClick);
+        ul.append(li);
 
     }
 }
@@ -88,8 +105,8 @@ function onOptionClick (event) {
         timerCount -= timePerQuestion 
     }
     nextQuestion++
-    showElement(answerOutcome)
-    showNextQuestion()
+    showElement(answerOutcome);
+    showNextQuestion();
 }
 
 function setTimeValue(val) {
@@ -105,45 +122,50 @@ function startTimer() {
       if (timerCount === 0) {
         clearInterval(timer);
         finishQuiz();
-      }
+      };
     }, 1000);
-  }
+  };
 
 function startQuiz () {
     timerCount = questions.length * timePerQuestion
-    hideElement(startSection)
-    showElement(questionsSection)
-    showNextQuestion()
-    startTimer()
-}
+    hideElement(startSection);
+    showElement(questionsSection);
+    showNextQuestion();
+    startTimer();
+};
 
 function finishQuiz() {
     clearInterval(timer);
-    hideElement(questionsSection)
+    hideElement(questionsSection);
 
-    document.getElementById("final-score").textContent = score
-    nextQuestion = 0
-    showElement(allDoneSection)
+    document.getElementById("final-score").textContent = score;
+    nextQuestion = 0;
+    showElement(allDoneSection);
     
-}
+};
 
 function saveScore(event) {
-    event.preventDefault()
-    var input = event.target.querySelector("input")
+    event.preventDefault();
+    var input = event.target.querySelector("input");
     var result = {
         score,
         initials: input.value
-    }
+    };
+
+    if(!input.value) {
+        alert('Please enter your initials')
+        return;
+    };;
 
     var scores = JSON.parse(localStorage.getItem("scores")) || []
-    scores.push(result)
-    score = 0
-    setTimeValue(0)
+    scores.push(result);
+    score = 0;
+    setTimeValue(0);;
     input.value = ""
     
     localStorage.setItem("scores", JSON.stringify(scores))
-    viewHighScores(event)
-}
+    viewHighScores(event);
+};
 
 function viewHighScores(event) {
     event.preventDefault()
@@ -151,7 +173,7 @@ function viewHighScores(event) {
 
     renderHighScores()
     showElement(scoresSection)
-}
+};
 
 function renderHighScores() {
     var ul = document.querySelector("#scores ul")
@@ -160,25 +182,27 @@ function renderHighScores() {
     ul.innerHTML = ""
     for(var i=0; i<scores.length; i++) {
         var li = document.createElement("li");
-        li.innerHTML = (i+1) + ". " + scores[i].initials + " - " +scores[i].score;
+        li.innerHTML = (i+1) + " . " + scores[i].initials + " - " +scores[i].score;
         ul.append(li)
 
     }
-}
+};
 
 function clearHighScores() {
-    localStorage.setItem("scores", JSON.stringify([]))
-    renderHighScores()
-}
+    localStorage.setItem("scores", JSON.stringify([]));
+    renderHighScores();
+};
 
 function viewQuiz() {
-    hideElement(scoresSection)
-    hideElement(allDoneSection)
-    hideElement(answerOutcome)
-    hideElement(questionsSection)
-    showElement(startSection)
-    showElement(quizSection)
-}
+    clearInterval(timer);
+    setTimeValue(0);
+    hideElement(scoresSection);
+    hideElement(allDoneSection);
+    hideElement(answerOutcome);
+    showElement(startSection);
+    showElement(quizSection);
+    hideElement(questionsSection);
+};
 
 function sortScores(scores) {
     return scores.sort(function (a, b){
@@ -186,6 +210,4 @@ function sortScores(scores) {
 
     })
 
-}
-
-
+};
