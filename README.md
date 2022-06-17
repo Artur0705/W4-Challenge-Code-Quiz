@@ -28,9 +28,10 @@ THEN I can save my initials and score
 - Applied media querries to make website responsive.
 - The application emphasizes the use of Javascript to provide quiz questions and collect user data to determine whether the answers to a question are correct or not.
 - Ensured that acceptance criteria met.
-
+- Click [Screenshot](#screenshot) to see the page screenshot and animation 
 ## Demo
 URL: https://artur0705.github.io/W4-Challenge-Code-Quiz
 
 ## Screenshot
 ![image](./assets/images/screenshot.jpeg)
+![image](./assets/images/code-quiz.gif)
